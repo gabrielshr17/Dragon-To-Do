@@ -23,9 +23,27 @@
 
     <header>
       <div class="sigil-line">
-        <span class="dragon-glyph">🐉</span>
+        <span class="dragon-glyph">
+          <svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 26 C0 14 12 2 20 10 L16 22 Z" fill="#d4a853" opacity="0.88"/>
+            <ellipse cx="22" cy="25" rx="10" ry="6" fill="#d4a853"/>
+            <path d="M28 20 C31 13 35 10 39 7" stroke="#d4a853" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="41" cy="6" rx="4" ry="3" fill="#d4a853"/>
+            <circle cx="43" cy="5" r="1.2" fill="#8b0000"/>
+            <path d="M13 29 C9 31 4 33 0 34" stroke="#d4a853" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
         <span class="house-name">House Targaryen</span>
-        <span class="dragon-glyph">🐉</span>
+        <span class="dragon-glyph" style="display:inline-block; transform:scaleX(-1);">
+          <svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 26 C0 14 12 2 20 10 L16 22 Z" fill="#d4a853" opacity="0.88"/>
+            <ellipse cx="22" cy="25" rx="10" ry="6" fill="#d4a853"/>
+            <path d="M28 20 C31 13 35 10 39 7" stroke="#d4a853" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="41" cy="6" rx="4" ry="3" fill="#d4a853"/>
+            <circle cx="43" cy="5" r="1.2" fill="#8b0000"/>
+            <path d="M13 29 C9 31 4 33 0 34" stroke="#d4a853" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
       </div>
       <h1>The Dragon's Watch</h1>
       <p class="tagline">Fire &amp; Blood — your conquests await.</p>
@@ -51,7 +69,12 @@
             <option value="high">High</option>
           </select>
           <input type="date" id="due-date-input" aria-label="Due date" />
-          <button type="submit" id="add-btn">Add Task</button>
+          <button type="submit" id="add-btn">
+            <svg width="12" height="15" viewBox="0 0 12 15" fill="currentColor" aria-hidden="true" style="vertical-align:middle;margin-right:5px;margin-bottom:1px;">
+              <path d="M6 0 C6 0 11 4.5 11 8.5 C11 11.5 9 14 6 15 C3 14 1 11.5 1 8.5 C1 5.5 4 3 5 5 C5 2.5 6 0 6 0Z"/>
+            </svg>
+            Add Task
+          </button>
         </form>
       </section>
 
@@ -63,6 +86,13 @@
       </section>
 
       <div id="empty-state">
+        <div class="empty-dragon">
+          <img
+            src="https://images.unsplash.com/photo-1577493340887-b7bfff550145?w=320&q=80"
+            alt="Dragon statue on castle"
+            loading="lazy"
+          />
+        </div>
         <p>No tasks yet. The realm awaits your command.</p>
       </div>
 
