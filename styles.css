@@ -1,0 +1,351 @@
+/* ============================================================
+   The Dragon's Watch — House of the Dragon Theme
+   styles.css
+   ============================================================ */
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #f0e6d3;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes ember-pulse {
+  from {
+    text-shadow:
+      0 0 20px rgba(196, 30, 30, 0.4),
+      0 0 40px rgba(196, 30, 30, 0.15);
+  }
+  to {
+    text-shadow:
+      0 0 25px rgba(230, 48, 48, 0.8),
+      0 0 50px rgba(230, 48, 48, 0.35),
+      0 0 80px rgba(196, 30, 30, 0.2);
+  }
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  text-align: center;
+  padding: 2.5rem 1rem 1.75rem;
+  border-bottom: 1px solid #8b0000;
+}
+
+.sigil-line {
+  font-family: 'Cinzel', Georgia, serif;
+  color: #d4a853;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.dragon-glyph {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.house-name {
+  letter-spacing: 0.25em;
+}
+
+h1 {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: #f0e6d3;
+  animation: ember-pulse 3s ease-in-out infinite alternate;
+  margin: 0.5rem 0 0.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+.tagline {
+  color: #a89880;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── Main layout ──────────────────────────────────────────── */
+main {
+  padding-bottom: 2rem;
+}
+
+/* ── Form section ─────────────────────────────────────────── */
+.form-section {
+  margin: 1.75rem 0 1rem;
+}
+
+#task-form {
+  display: flex;
+  gap: 0.625rem;
+}
+
+#task-input {
+  flex: 1;
+  background-color: #1c1c1c;
+  color: #f0e6d3;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#task-input::placeholder {
+  color: #5a5a5a;
+}
+
+#task-input:focus {
+  outline: none;
+  border-color: #c41e1e;
+  box-shadow: 0 0 0 2px rgba(196, 30, 30, 0.25);
+}
+
+#add-btn {
+  background-color: #8b0000;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+#add-btn:hover {
+  background-color: #c41e1e;
+  box-shadow: 0 0 12px rgba(196, 30, 30, 0.5);
+}
+
+#add-btn:active {
+  transform: scale(0.96);
+}
+
+/* ── Progress section ─────────────────────────────────────── */
+.progress-section {
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#progress-text {
+  text-align: right;
+  color: #a89880;
+  font-size: 0.875rem;
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+#progress-bar {
+  background-color: #1c1c1c;
+  border: 1px solid #3a3a3a;
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+#progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #8b0000, #e63030);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 8px rgba(196, 30, 30, 0.6);
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+#empty-state {
+  display: none;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #a89880;
+  font-style: italic;
+}
+
+#empty-state::before {
+  content: "🐉";
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-style: normal;
+  filter: grayscale(40%);
+  opacity: 0.7;
+}
+
+/* ── Task list ────────────────────────────────────────────── */
+#task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Task items ───────────────────────────────────────────── */
+.task-item {
+  background-color: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease;
+}
+
+.task-item:hover {
+  border-color: #8b0000;
+  box-shadow: 0 0 8px rgba(139, 0, 0, 0.2);
+}
+
+.task-item.completed {
+  opacity: 0.55;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #a89880;
+}
+
+/* ── Task toggle (custom checkbox) ───────────────────────── */
+.task-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #555;
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.task-toggle:hover {
+  border-color: #8b0000;
+}
+
+.task-toggle:checked {
+  border-color: #c41e1e;
+  background-color: #8b0000;
+}
+
+.task-toggle:checked::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ── Task text ────────────────────────────────────────────── */
+.task-text {
+  flex: 1;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 0.975rem;
+  line-height: 1.4;
+  color: #f0e6d3;
+  word-break: break-word;
+}
+
+.task-text[contenteditable="true"] {
+  outline: 1px solid #c41e1e;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* ── Edit & Delete buttons ────────────────────────────────── */
+.task-edit,
+.task-delete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.task-edit {
+  color: #a89880;
+}
+
+.task-edit:hover {
+  color: #d4a853;
+}
+
+.task-delete {
+  color: #555;
+}
+
+.task-delete:hover {
+  color: #c41e1e;
+  box-shadow: 0 0 8px rgba(196, 30, 30, 0.35);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: #3a3a3a;
+  font-size: 0.75rem;
+  border-top: 1px solid #1c1c1c;
+  margin-top: 3rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── Visually hidden utility ──────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ── Responsive — mobile < 480px ─────────────────────────── */
+@media (max-width: 480px) {
+  #task-form {
+    flex-direction: column;
+  }
+
+  #add-btn {
+    width: 100%;
+  }
+}

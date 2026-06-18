@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Dragon's Watch</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <header>
+      <div class="sigil-line">
+        <span class="dragon-glyph">🐉</span>
+        <span class="house-name">House Targaryen</span>
+        <span class="dragon-glyph">🐉</span>
+      </div>
+      <h1>The Dragon's Watch</h1>
+      <p class="tagline">Fire &amp; Blood — your conquests await.</p>
+    </header>
+
+    <main>
+
+      <section class="form-section">
+        <form id="task-form" novalidate>
+          <label for="task-input" class="visually-hidden">New task</label>
+          <input
+            type="text"
+            id="task-input"
+            name="task"
+            placeholder="Add a new task..."
+            autocomplete="off"
+            maxlength="200"
+            required
+          />
+          <button type="submit" id="add-btn">Add Task</button>
+        </form>
+      </section>
+
+      <section class="progress-section">
+        <span id="progress-text">0 of 0 done</span>
+        <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Task completion progress">
+          <div id="progress-bar-fill"></div>
+        </div>
+      </section>
+
+      <div id="empty-state">
+        <p>No tasks yet. The realm awaits your command.</p>
+      </div>
+
+      <ul id="task-list" aria-label="Task list" aria-live="polite"></ul>
+
+    </main>
+
+    <footer>
+      <p>The Dragon's Watch &copy; 2026</p>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
