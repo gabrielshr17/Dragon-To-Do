@@ -14,6 +14,12 @@
 
 body {
   background-color: #0a0a0a;
+  background-image:
+    linear-gradient(to bottom, rgba(10,10,10,0.84) 0%, rgba(10,10,10,0.74) 50%, rgba(10,10,10,0.90) 100%),
+    url('https://images.unsplash.com/photo-1618325508550-951512a1e82d?w=1920&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   color: #f0e6d3;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   min-height: 100vh;
@@ -42,6 +48,16 @@ header {
   text-align: center;
   padding: 2.5rem 1rem 1.75rem;
   border-bottom: 1px solid #8b0000;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(139,0,0,0.28) 0%, transparent 68%);
+  pointer-events: none;
 }
 
 .sigil-line {
@@ -59,8 +75,11 @@ header {
 }
 
 .dragon-glyph {
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   letter-spacing: 0;
+  filter: drop-shadow(0 0 6px rgba(212,168,83,0.45));
 }
 
 .house-name {
@@ -224,19 +243,28 @@ main {
 #empty-state {
   display: none;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 2.5rem 1rem;
   color: #a89880;
   font-style: italic;
 }
 
-#empty-state::before {
-  content: "🐉";
-  display: block;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  font-style: normal;
-  filter: grayscale(40%);
-  opacity: 0.7;
+.empty-dragon {
+  margin-bottom: 1.25rem;
+}
+
+.empty-dragon img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #3a3a3a;
+  box-shadow: 0 0 20px rgba(139,0,0,0.35), 0 0 40px rgba(139,0,0,0.15);
+  filter: brightness(0.75) contrast(1.1) sepia(0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.empty-dragon img:hover {
+  box-shadow: 0 0 28px rgba(196,30,30,0.5), 0 0 50px rgba(139,0,0,0.25);
 }
 
 /* ── Task list ────────────────────────────────────────────── */
@@ -448,6 +476,71 @@ footer {
   border-top: 1px solid #1c1c1c;
   margin-top: 3rem;
   letter-spacing: 0.04em;
+}
+
+/* ── Icon button shared base ──────────────────────────────── */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn svg {
+  pointer-events: none;
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+
+/* 1. Fire burst — Add Task button */
+@keyframes anim-fire-burst {
+  0%   { box-shadow: 0 0 0 0 rgba(196,30,30,0); }
+  35%  { box-shadow: 0 0 0 10px rgba(230,48,48,0.55), 0 0 28px 4px rgba(196,30,30,0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(196,30,30,0); }
+}
+.anim-fire-burst {
+  animation: anim-fire-burst 0.55s ease-out;
+}
+
+/* 2. Dragon breath — task toggle complete */
+@keyframes anim-dragon-breath {
+  0%   { background-color: transparent; }
+  30%  { background-color: rgba(196,30,30,0.2); }
+  100% { background-color: transparent; }
+}
+.anim-dragon-breath {
+  animation: anim-dragon-breath 0.65s ease-out;
+}
+
+/* 3. Flame out — delete (runs before DOM removal) */
+@keyframes anim-flame-out {
+  0%   { opacity: 1; transform: scaleY(1);    filter: brightness(1); }
+  40%  { opacity: 0.85; transform: scaleY(1.04); filter: brightness(1.9) sepia(1) saturate(6) hue-rotate(-15deg); }
+  100% { opacity: 0;  transform: scaleY(0.55) translateY(-10px); filter: brightness(3.5); }
+}
+.anim-flame-out {
+  animation: anim-flame-out 0.45s ease-in forwards;
+  pointer-events: none;
+}
+
+/* 4. Sword slash — edit click */
+@keyframes anim-sword-slash {
+  0%   { transform: translateX(0)   rotate(0deg);  }
+  25%  { transform: translateX(4px) rotate(1.2deg);}
+  70%  { transform: translateX(-3px) rotate(-1deg);}
+  100% { transform: translateX(0)   rotate(0deg);  }
+}
+.anim-sword-slash {
+  animation: anim-sword-slash 0.32s ease-out;
+}
+
+/* 5. Gold shimmer — save commit */
+@keyframes anim-gold-shimmer {
+  0%   { box-shadow: inset 0 0 0 rgba(212,168,83,0); }
+  45%  { box-shadow: inset 0 0 16px rgba(212,168,83,0.22), 0 0 20px 4px rgba(212,168,83,0.5); }
+  100% { box-shadow: inset 0 0 0 rgba(212,168,83,0); }
+}
+.anim-gold-shimmer {
+  animation: anim-gold-shimmer 0.75s ease-out;
 }
 
 /* ── Visually hidden utility ──────────────────────────────── */
