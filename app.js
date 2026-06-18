@@ -403,6 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Init ───────────────────────────────────────────────── */
 
+  dueDateInput.min = todayStr();
   tasks = loadTasks();
   renderTasks();
 
