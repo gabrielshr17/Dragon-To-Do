@@ -98,6 +98,7 @@ main {
 #task-form {
   display: flex;
   gap: 0.625rem;
+  flex-wrap: wrap;
 }
 
 #task-input {
@@ -144,6 +145,46 @@ main {
 
 #add-btn:active {
   transform: scale(0.96);
+}
+
+/* ── Priority select & due date input ────────────────────── */
+#priority-select {
+  background-color: #1c1c1c;
+  color: #f0e6d3;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 0.75rem 0.5rem;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  cursor: pointer;
+  width: 90px;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#priority-select:focus {
+  outline: none;
+  border-color: #c41e1e;
+  box-shadow: 0 0 0 2px rgba(196, 30, 30, 0.25);
+}
+
+#due-date-input {
+  background-color: #1c1c1c;
+  color: #f0e6d3;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 0.75rem 0.625rem;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color-scheme: dark;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#due-date-input:focus {
+  outline: none;
+  border-color: #c41e1e;
+  box-shadow: 0 0 0 2px rgba(196, 30, 30, 0.25);
 }
 
 /* ── Progress section ─────────────────────────────────────── */
@@ -211,6 +252,7 @@ main {
 .task-item {
   background-color: #141414;
   border: 1px solid #2a2a2a;
+  border-left-width: 3px;
   border-radius: 6px;
   padding: 0.875rem 1rem;
   display: flex;
@@ -220,7 +262,6 @@ main {
 }
 
 .task-item:hover {
-  border-color: #8b0000;
   box-shadow: 0 0 8px rgba(139, 0, 0, 0.2);
 }
 
@@ -231,6 +272,59 @@ main {
 .task-item.completed .task-text {
   text-decoration: line-through;
   color: #a89880;
+}
+
+/* Priority borders */
+.priority-high  { border-left-color: #c41e1e; }
+.priority-medium { border-left-color: #d4a853; }
+.priority-low   { border-left-color: #3a3a3a; }
+
+/* Drag states */
+.drag-handle {
+  cursor: grab;
+  color: #444;
+  font-size: 1rem;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+  padding: 0 2px;
+  transition: color 0.15s ease;
+}
+
+.task-item:hover .drag-handle {
+  color: #666;
+}
+
+.task-item.dragging {
+  opacity: 0.35;
+  border-style: dashed;
+}
+
+.task-item.drag-over {
+  border-color: #c41e1e;
+  box-shadow: 0 0 10px rgba(196, 30, 30, 0.4);
+}
+
+/* Task body (text + due date stacked) */
+.task-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+/* Due date */
+.task-due {
+  font-size: 0.72rem;
+  color: #a89880;
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.03em;
+}
+
+.task-due.overdue {
+  color: #c41e1e;
+  font-weight: 600;
 }
 
 /* ── Task toggle (custom checkbox) ───────────────────────── */
@@ -271,7 +365,6 @@ main {
 
 /* ── Task text ────────────────────────────────────────────── */
 .task-text {
-  flex: 1;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   font-size: 0.975rem;
   line-height: 1.4;
@@ -285,8 +378,10 @@ main {
   padding: 0 2px;
 }
 
-/* ── Edit & Delete buttons ────────────────────────────────── */
+/* ── Edit, Save, Cancel & Delete buttons ──────────────────── */
 .task-edit,
+.task-save,
+.task-cancel,
 .task-delete {
   background: transparent;
   border: none;
@@ -305,6 +400,34 @@ main {
 
 .task-edit:hover {
   color: #d4a853;
+}
+
+/* Save & Cancel hidden by default; shown when editing */
+.task-save,
+.task-cancel {
+  display: none;
+}
+
+.task-item.editing .task-save {
+  display: inline-flex;
+  color: #d4a853;
+}
+
+.task-item.editing .task-save:hover {
+  color: #f0e6d3;
+}
+
+.task-item.editing .task-cancel {
+  display: inline-flex;
+  color: #555;
+}
+
+.task-item.editing .task-cancel:hover {
+  color: #c41e1e;
+}
+
+.task-item.editing .task-edit {
+  display: none;
 }
 
 .task-delete {
@@ -345,7 +468,9 @@ footer {
     flex-direction: column;
   }
 
-  #add-btn {
+  #add-btn,
+  #priority-select,
+  #due-date-input {
     width: 100%;
   }
 }
